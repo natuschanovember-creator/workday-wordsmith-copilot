@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 type Props = {
   kind: DocKind;
   title: string;
-  activeId?: string;
+  activeId?: string | undefined;
   onOpen: (id: string) => void;
   onDeleted?: (id: string) => void;
 };

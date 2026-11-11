@@ -36,7 +36,7 @@ type Props = {
   inputs: Record<string, unknown>;
   canGenerate: boolean;
   titleFallback: string;
-  docId?: string;
+  docId?: string | undefined;
   onDocChange: (id: string | undefined) => void;
   onLoadInputs: (inputs: Record<string, unknown>) => void;
   refinePresets: string[];
@@ -276,7 +276,7 @@ export function GeneratorWorkspace({
                   title="Undo last AI change"
                   disabled={!history.length || busy}
                   onClick={() => {
-                    setContent(history[history.length - 1]);
+                    setContent(history[history.length - 1] ?? "");
                     setHistory((h) => h.slice(0, -1));
                   }}
                 >

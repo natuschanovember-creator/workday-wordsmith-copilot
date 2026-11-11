@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- AI calls go through `@lovable.dev/ai-gateway`, imported dynamically inside server handlers only (`src/lib/ai.functions.ts`, `src/routes/api/chat.ts`); shared system prompts and responsible-AI rules live in `src/lib/ai.server.ts`. Why: keeps the server-only SDK out of the browser bundle and one source of AI behaviour.
+- Email and research prompts are built client-side by `src/lib/prompts.ts` in a fixed ROLE → CONTEXT → TASK → REQUIREMENTS → OUTPUT FORMAT structure and shown to the user, who may edit them. Why: transparent, editable prompts are a product requirement.
+- Chat streams via the `/api/chat` server route (AI SDK UI message stream) and the server verifies the bearer token, saves the user message, and rebuilds history from the database before calling the model. Why: the model must see full history and persistence must not trust the client.
+- Signed-in pages live under `src/routes/_authenticated/` (client-only gate + sidebar shell in `src/components/app-shell.tsx`). Why: session is in localStorage, so the gate cannot run during SSR.

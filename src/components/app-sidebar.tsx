@@ -55,7 +55,7 @@ export function AppSidebar() {
   const { isMobile, setOpenMobile } = useSidebar();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [user, setUser] = useState<{ id: string; email?: string } | null>(null);
+  const [user, setUser] = useState<{ id: string; email?: string | undefined } | null>(null);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {

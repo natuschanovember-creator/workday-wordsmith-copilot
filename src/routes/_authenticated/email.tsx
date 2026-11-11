@@ -21,8 +21,8 @@ import {
 import { profileQuery } from "@/lib/queries";
 
 export const Route = createFileRoute("/_authenticated/email")({
-  validateSearch: (search: Record<string, unknown>): { doc?: string } => ({
-    doc: typeof search.doc === "string" ? search.doc : undefined,
+  validateSearch: (search: Record<string, unknown>): { doc?: string | undefined } => ({
+    doc: typeof search["doc"] === "string" ? search["doc"] : undefined,
   }),
   head: () => ({
     meta: [

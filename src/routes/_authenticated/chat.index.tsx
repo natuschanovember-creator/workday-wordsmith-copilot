@@ -7,8 +7,9 @@ import { threadsQuery } from "@/lib/queries";
 export const Route = createFileRoute("/_authenticated/chat/")({
   loader: async ({ context }) => {
     const threads = await context.queryClient.ensureQueryData(threadsQuery());
-    if (threads.length > 0) {
-      throw redirect({ to: "/chat/$threadId", params: { threadId: threads[0].id }, replace: true });
+    const latest = threads[0];
+    if (latest) {
+      throw redirect({ to: "/chat/$threadId", params: { threadId: latest.id }, replace: true });
     }
     const { data, error } = await supabase
       .from("chat_threads")

@@ -276,7 +276,7 @@ export function GeneratorWorkspace({
                   title="Undo last AI change"
                   disabled={!history.length || busy}
                   onClick={() => {
-                    setContent(history[history.length - 1]);
+                    setContent(history[history.length - 1] ?? "");
                     setHistory((h) => h.slice(0, -1));
                   }}
                 >

@@ -19,8 +19,8 @@ import {
 } from "@/lib/prompts";
 
 export const Route = createFileRoute("/_authenticated/research")({
-  validateSearch: (search: Record<string, unknown>): { doc?: string } => ({
-    doc: typeof search.doc === "string" ? search.doc : undefined,
+  validateSearch: (search: Record<string, unknown>): { doc?: string | undefined } => ({
+    doc: typeof search["doc"] === "string" ? search["doc"] : undefined,
   }),
   head: () => ({
     meta: [

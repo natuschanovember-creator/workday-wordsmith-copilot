@@ -36,7 +36,7 @@ type Props = {
   inputs: Record<string, unknown>;
   canGenerate: boolean;
   titleFallback: string;
-  docId?: string;
+  docId?: string | undefined;
   onDocChange: (id: string | undefined) => void;
   onLoadInputs: (inputs: Record<string, unknown>) => void;
   refinePresets: string[];
